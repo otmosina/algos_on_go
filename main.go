@@ -1,20 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"learn/algos_on_go/util"
+)
 
 func main() {
 	fmt.Println("Hello world!")
-	arr := []int32{1, 3, 5, 7, 9}
+	// arr := []int{1, 3, 5, 7, 9}
 	// for i, x := range arr {
 	// 	fmt.Printf("")
 	// }
-	fmt.Println(binarySearch(arr, 1))
+	// fmt.Println(binarySearch(arr, 1))
+
+	memStore := util.NewMemStore()
+	util.GenerateSequence(100000000, memStore)
+	// memStore.Print()
+	fmt.Println(binarySearch(memStore.Arr, 999998))
 }
 
 var mid, index int
-var cur int32
+var cur int
 
-func binarySearch(list []int32, item int32) int {
+func binarySearch(list []int, item int) int {
 	result := -1
 	low := 0
 	high := len(list) - 1
