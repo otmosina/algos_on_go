@@ -1,9 +1,9 @@
 package util
 
-var mid, index int
-var cur int
-
 func BinarySearch(list []int, item int) int {
+	var mid, index int
+	var cur int
+
 	result := -1
 	low := 0
 	high := len(list) - 1

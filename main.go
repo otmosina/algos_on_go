@@ -23,5 +23,6 @@ func main() {
 
 	// memStore.Print()
 	fmt.Println(util.BinarySearch(memStore.Arr, 915))
+	fmt.Println(util.SelectionSort([]int{3, 2, 1, 321, 2, 1}))
 
 }
