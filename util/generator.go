@@ -1,8 +1,10 @@
 package util
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
+	"os"
 	"sort"
 	"time"
 )
@@ -12,7 +14,9 @@ type memStore struct {
 }
 
 func NewMemStore() *memStore {
-	return &memStore{}
+	store := &memStore{}
+	store.readFromFile()
+	return store
 }
 
 func (m *memStore) add(item int) {
@@ -20,6 +24,20 @@ func (m *memStore) add(item int) {
 }
 
 func (m *memStore) writeToFile() {
+
+}
+
+func (m *memStore) readFromFile() {
+	dat, err := os.ReadFile("sorted_list.json")
+	// Check(err)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	var seq []int
+	err = json.Unmarshal(dat, &seq)
+	Check(err)
+	m.Arr = seq
 
 }
 
@@ -42,4 +60,5 @@ func GenerateSequence(l int, m *memStore) {
 		m.add(randomInt(l))
 	}
 	m.Sort()
+	WriteToFile(m.Arr)
 }
