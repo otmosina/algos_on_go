@@ -8,24 +8,87 @@ import (
 
 func TestFibonacci(t *testing.T) {
 	testCases := []struct {
-		input    int
-		expected int
+		name       string
+		input      int
+		expected   int
+		assertFunc func(t *testing.T, expected int, actual int, err error)
 	}{
 		{
+			name:     "happyCase2",
 			input:    2,
 			expected: 1,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.NoError(t, err)
+				require.Equal(t, expected, actual)
+			},
 		},
 
 		{
+			name:     "happyCase10",
 			input:    10,
 			expected: 34,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.NoError(t, err)
+				require.Equal(t, expected, actual)
+			},
+		},
+
+		{
+			name:     "happyCase15",
+			input:    15,
+			expected: 377,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.NoError(t, err)
+				require.Equal(t, expected, actual)
+			},
+		},
+
+		{
+			name:     "happyCase25",
+			input:    25,
+			expected: 46368,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.NoError(t, err)
+				require.Equal(t, expected, actual)
+			},
+		},
+		{
+			name:     "happyCase0",
+			input:    1,
+			expected: 0,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.NoError(t, err)
+				require.Equal(t, expected, actual)
+			},
+		},
+		{
+			name:     "errCase-100",
+			input:    -100,
+			expected: -1,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.Error(t, err)
+				require.Equal(t, expected, actual)
+			},
+		},
+		{
+			name:     "errCase0",
+			input:    0,
+			expected: -1,
+			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+				require.Error(t, err)
+				require.Equal(t, expected, actual)
+			},
 		},
 	}
 	for i := range testCases {
 		tc := testCases[i]
 		fib, err := Fibonacci(tc.input)
-		require.NoError(t, err)
-		require.Equal(t, tc.expected, fib)
+		// t.Run(tc.name, tc.assertFunc(t, tc.expected, fib, err))
+		t.Run(tc.name, func(t *testing.T) {
+			tc.assertFunc(t, tc.expected, fib, err)
+		})
+		// require.NoError(t, err)
+		// require.Equal(t, tc.expected, fib)
 	}
 
 }

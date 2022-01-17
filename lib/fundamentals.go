@@ -43,7 +43,7 @@ func Fibonacci(n int) (int, error) {
 	fib := []int{0, 1}
 
 	if n <= 0 {
-		return 0, errors.New("N <= 0")
+		return -1, errors.New("N <= 0")
 	}
 
 	if n == 1 {
