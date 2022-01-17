@@ -7,9 +7,25 @@ import (
 )
 
 func TestReverse(t *testing.T) {
-	inputString := "abc"
-	expected := "cba"
-	require.Equal(t, expected, Reverse(inputString))
+	testCases := []struct {
+		input    string
+		expected string
+	}{
+		{
+			input:    "abc",
+			expected: "cba",
+		},
+
+		{
+			input:    "a",
+			expected: "a",
+		},
+	}
+
+	for i := range testCases {
+		tc := testCases[i]
+		require.Equal(t, tc.expected, Reverse(tc.input))
+	}
 }
 
 func TestFizzBuzz(t *testing.T) {

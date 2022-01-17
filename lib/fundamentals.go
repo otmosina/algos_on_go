@@ -37,3 +37,27 @@ func FizzBuzz(start, stop int) (string, error) {
 	}
 	return strings.TrimSpace(strings.Join(result, "")), nil
 }
+
+func Finonacci(n int) (int, error) {
+	var err error
+	fib := []int{0, 1}
+
+	if n <= 0 {
+		return 0, errors.New("N <= 0")
+	}
+
+	if n == 1 {
+		return 0, nil
+	}
+
+	if n == 2 {
+		return 1, nil
+	}
+
+	for i := 3; i <= n; i++ {
+		fib = append(fib, fib[len(fib)-1]+fib[len(fib)-2])
+	}
+	// Finonacci(2)
+
+	return fib[len(fib)-1], err
+}
