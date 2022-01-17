@@ -38,7 +38,7 @@ func FizzBuzz(start, stop int) (string, error) {
 	return strings.TrimSpace(strings.Join(result, "")), nil
 }
 
-func Finonacci(n int) (int, error) {
+func Fibonacci(n int) (int, error) {
 	var err error
 	fib := []int{0, 1}
 

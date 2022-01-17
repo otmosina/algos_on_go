@@ -6,6 +6,30 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestFibonacci(t *testing.T) {
+	testCases := []struct {
+		input    int
+		expected int
+	}{
+		{
+			input:    2,
+			expected: 1,
+		},
+
+		{
+			input:    10,
+			expected: 34,
+		},
+	}
+	for i := range testCases {
+		tc := testCases[i]
+		fib, err := Fibonacci(tc.input)
+		require.NoError(t, err)
+		require.Equal(t, tc.expected, fib)
+	}
+
+}
+
 func TestReverse(t *testing.T) {
 	testCases := []struct {
 		input    string

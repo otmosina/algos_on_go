@@ -21,6 +21,6 @@ func main() {
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 	fmt.Println(lib.Reverse("asd"))
-	fmt.Println(lib.Finonacci(5))
+	fmt.Println(lib.Fibonacci(5))
 
 }
