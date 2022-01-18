@@ -3,6 +3,7 @@ package lib
 import (
 	"errors"
 	"fmt"
+	"math/big"
 	"strings"
 )
 
@@ -38,26 +39,41 @@ func FizzBuzz(start, stop int) (string, error) {
 	return strings.TrimSpace(strings.Join(result, "")), nil
 }
 
-func Fibonacci(n int) (int, error) {
+func Fibonacci(n int) (*big.Int, error) {
 	var err error
-	fib := []int{0, 1}
+	// var last *big.Int
+	// limit := big.NewInt(n)
+	var fib [3]*big.Int //{0, 1}
+	fib[1] = big.NewInt(0)
+	fib[2] = big.NewInt(1)
 
+	// fib = append(fib, big.NewInt(0))
+	// fib = append(fib, big.NewInt(1))
 	if n <= 0 {
-		return -1, errors.New("N <= 0")
+		return big.NewInt(-1), errors.New("N <= 0")
 	}
 
 	if n == 1 {
-		return 0, nil
+		return big.NewInt(0), nil
 	}
 
 	if n == 2 {
-		return 1, nil
+		return big.NewInt(1), nil
 	}
+
+	// step := len(fib)
 
 	for i := 3; i <= n; i++ {
-		fib = append(fib, fib[len(fib)-1]+fib[len(fib)-2])
+		next := big.NewInt(0).Add(fib[1], fib[2])
+		fib[0] = fib[1]
+		fib[1] = fib[2]
+		fib[2] = next
 	}
-	// Finonacci(2)
 
+	// for step <= n {
+	// 	next := big.NewInt(0).Add(fib[len(fib)-1], fib[len(fib)-2])
+	// 	fib = append(fib, next)
+	// 	step = len(fib)
+	// }
 	return fib[len(fib)-1], err
 }
