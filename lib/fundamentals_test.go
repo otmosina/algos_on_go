@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"math/big"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -10,14 +11,14 @@ func TestFibonacci(t *testing.T) {
 	testCases := []struct {
 		name       string
 		input      int
-		expected   int
-		assertFunc func(t *testing.T, expected int, actual int, err error)
+		expected   *big.Int
+		assertFunc func(t *testing.T, expected *big.Int, actual *big.Int, err error)
 	}{
 		{
 			name:     "happyCase2",
 			input:    2,
-			expected: 1,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(1),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.NoError(t, err)
 				require.Equal(t, expected, actual)
 			},
@@ -26,8 +27,8 @@ func TestFibonacci(t *testing.T) {
 		{
 			name:     "happyCase10",
 			input:    10,
-			expected: 34,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(34),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.NoError(t, err)
 				require.Equal(t, expected, actual)
 			},
@@ -36,8 +37,8 @@ func TestFibonacci(t *testing.T) {
 		{
 			name:     "happyCase15",
 			input:    15,
-			expected: 377,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(377),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.NoError(t, err)
 				require.Equal(t, expected, actual)
 			},
@@ -46,8 +47,8 @@ func TestFibonacci(t *testing.T) {
 		{
 			name:     "happyCase25",
 			input:    25,
-			expected: 46368,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(46368),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.NoError(t, err)
 				require.Equal(t, expected, actual)
 			},
@@ -55,8 +56,8 @@ func TestFibonacci(t *testing.T) {
 		{
 			name:     "happyCase0",
 			input:    1,
-			expected: 0,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(0),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.NoError(t, err)
 				require.Equal(t, expected, actual)
 			},
@@ -64,8 +65,8 @@ func TestFibonacci(t *testing.T) {
 		{
 			name:     "errCase-100",
 			input:    -100,
-			expected: -1,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(-1),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.Error(t, err)
 				require.Equal(t, expected, actual)
 			},
@@ -73,8 +74,8 @@ func TestFibonacci(t *testing.T) {
 		{
 			name:     "errCase0",
 			input:    0,
-			expected: -1,
-			assertFunc: func(t *testing.T, expected int, actual int, err error) {
+			expected: big.NewInt(-1),
+			assertFunc: func(t *testing.T, expected *big.Int, actual *big.Int, err error) {
 				require.Error(t, err)
 				require.Equal(t, expected, actual)
 			},
