@@ -43,3 +43,41 @@ func GetSameParity(list []int) (result []int) {
 	}
 	return
 }
+
+func isAnagramm(word1, word2 string) bool {
+	hash := make(map[byte]int)
+	bytes1 := []byte(word1)
+	for _, b := range bytes1 {
+		if _, ok := hash[b]; ok {
+			hash[b]++
+		} else {
+			hash[b] = 1
+		}
+	}
+
+	bytes2 := []byte(word2)
+	for _, b := range bytes2 {
+		if _, ok := hash[b]; ok {
+			hash[b]--
+		} else {
+			return false
+		}
+	}
+
+	for _, v := range hash {
+		if v != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func AnagramFilter(target string, words []string) []string {
+	result := make([]string, 0)
+	for _, word := range words {
+		if isAnagramm(target, word) {
+			result = append(result, word)
+		}
+	}
+	return result
+}

@@ -84,13 +84,6 @@ func TestCountByYears(t *testing.T) {
 }
 
 func TestGetSameParity(t *testing.T) {
-	// def test_get_same_parity
-	//   assert { [] == get_same_parity([]) }
-	//   assert { [1, 1, 1, 1] == get_same_parity([1, 1, 1, 1]) }
-	//   assert { [1, 3] == get_same_parity([1, 2, 3]) }
-	//   assert { [2, 10, 20] == get_same_parity([2, 10, 15, 20]) }
-	//   assert { [12_345] == get_same_parity([12_345, 32_154, 112_332]) }
-	// end
 	testCases := []struct {
 		input          []int
 		expectedOutput []int
@@ -114,5 +107,38 @@ func TestGetSameParity(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		require.Equal(t, tc.expectedOutput, GetSameParity(tc.input))
+	}
+}
+
+func TestAnagramFilter(t *testing.T) {
+
+	// def test_anagramm_filter
+	//   assert { anagramm_filter('laser', %w[lazing lazy lacer]) == [] }
+	//   assert { anagramm_filter('abba', %w[aabb abcd bbaa dada]) == %w[aabb bbaa] }
+	//   assert { anagramm_filter('racer', %w[crazer carer racar caers racer]) == %w[carer racer] }
+	// end
+	type inputStruct struct {
+		target string
+		words  []string
+	}
+	testCases := []struct {
+		input          inputStruct
+		expectedOutput []string
+	}{
+		{
+			input:          inputStruct{target: "laser", words: []string{"lazing", "lazy", "lacer"}},
+			expectedOutput: []string{},
+		},
+		{
+			input:          inputStruct{target: "abba", words: []string{"aabb", "abcd", "bbaa", "dada"}},
+			expectedOutput: []string{"aabb", "bbaa"},
+		},
+		{
+			input:          inputStruct{target: "racer", words: []string{"crazer", "carer", "racar", "caers", "racer"}},
+			expectedOutput: []string{"carer", "racer"},
+		},
+	}
+	for _, tc := range testCases {
+		require.Equal(t, tc.expectedOutput, AnagramFilter(tc.input.target, tc.input.words))
 	}
 }
