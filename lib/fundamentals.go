@@ -25,7 +25,7 @@ func FizzBuzz(start, stop int) (string, error) {
 	}
 
 	for i := start; i <= stop; i++ {
-		if i%3 == 0 && i%5 == 0 {
+		if i%15 == 0 {
 			result = append(result, " FizzBuzz")
 		} else if i%5 == 0 {
 			result = append(result, " Buzz")
@@ -39,16 +39,13 @@ func FizzBuzz(start, stop int) (string, error) {
 	return strings.TrimSpace(strings.Join(result, "")), nil
 }
 
+//про большие циферки https://blog.devgenius.io/big-int-in-go-handling-large-numbers-is-easy-157cb272dd4f
 func Fibonacci(n int) (*big.Int, error) {
 	var err error
-	// var last *big.Int
-	// limit := big.NewInt(n)
 	var fib [3]*big.Int //{0, 1}
 	fib[1] = big.NewInt(0)
 	fib[2] = big.NewInt(1)
 
-	// fib = append(fib, big.NewInt(0))
-	// fib = append(fib, big.NewInt(1))
 	if n <= 0 {
 		return big.NewInt(-1), errors.New("N <= 0")
 	}
@@ -61,19 +58,11 @@ func Fibonacci(n int) (*big.Int, error) {
 		return big.NewInt(1), nil
 	}
 
-	// step := len(fib)
-
 	for i := 3; i <= n; i++ {
 		next := big.NewInt(0).Add(fib[1], fib[2])
 		fib[0] = fib[1]
 		fib[1] = fib[2]
 		fib[2] = next
 	}
-
-	// for step <= n {
-	// 	next := big.NewInt(0).Add(fib[len(fib)-1], fib[len(fib)-2])
-	// 	fib = append(fib, next)
-	// 	step = len(fib)
-	// }
 	return fib[len(fib)-1], err
 }
