@@ -44,6 +44,10 @@ func main() {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+
+	parityArr := []int{1, 2, 3, 4}
+	fmt.Printf("Get Same Parity Task for arr %v: %v", parityArr, lib.GetSameParity(parityArr))
+	fmt.Println("")
 	fmt.Println(string(output))
 	util.PrintMemUsage()
 

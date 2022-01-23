@@ -82,3 +82,37 @@ func TestCountByYears(t *testing.T) {
 	require.Equal(t, expected, res)
 
 }
+
+func TestGetSameParity(t *testing.T) {
+	// def test_get_same_parity
+	//   assert { [] == get_same_parity([]) }
+	//   assert { [1, 1, 1, 1] == get_same_parity([1, 1, 1, 1]) }
+	//   assert { [1, 3] == get_same_parity([1, 2, 3]) }
+	//   assert { [2, 10, 20] == get_same_parity([2, 10, 15, 20]) }
+	//   assert { [12_345] == get_same_parity([12_345, 32_154, 112_332]) }
+	// end
+	testCases := []struct {
+		input          []int
+		expectedOutput []int
+	}{
+		{
+			input:          []int{1, 1, 1, 1},
+			expectedOutput: []int{1, 1, 1, 1},
+		},
+		{
+			input:          []int{1, 2, 3},
+			expectedOutput: []int{1, 3},
+		},
+		{
+			input:          []int{2, 10, 15, 20},
+			expectedOutput: []int{2, 10, 20},
+		},
+		{
+			input:          []int{12345, 32154, 112332},
+			expectedOutput: []int{12345},
+		},
+	}
+	for _, tc := range testCases {
+		require.Equal(t, tc.expectedOutput, GetSameParity(tc.input))
+	}
+}

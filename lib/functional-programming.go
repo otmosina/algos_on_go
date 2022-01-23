@@ -32,3 +32,14 @@ func CountByYears(users request) map[string]int {
 	return result
 
 }
+
+func GetSameParity(list []int) (result []int) {
+	oddFirst := list[0] % 2
+	for _, item := range list {
+		currentOdness := item % 2
+		if oddFirst == currentOdness {
+			result = append(result, item)
+		}
+	}
+	return
+}
