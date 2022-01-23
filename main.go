@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"learn/algos_on_go/lib"
 	"learn/algos_on_go/util"
@@ -31,6 +32,19 @@ func main() {
 	fmt.Println(lib.FizzBuzz(1, 10))
 	fmt.Println(lib.Reverse("Reverse This String"))
 	fmt.Println(lib.Fibonacci(100))
+
+	fmt.Println("Count By Years Task:")
+
+	u1 := lib.User{"Andrey", "male", "1990-14-01"}
+	uArr := []lib.User{u1, lib.User{"Andrey2", "male", "1990-14-01"}, lib.User{"Oli", "female", "1990-14-01"}}
+	fmt.Println(uArr)
+	resultMap := lib.CountByYears(uArr)
+
+	output, err := json.Marshal(resultMap)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(string(output))
 	util.PrintMemUsage()
 
 }
