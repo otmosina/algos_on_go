@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"learn/algos_on_go/api"
 	"learn/algos_on_go/lib"
 	"learn/algos_on_go/util"
 )
@@ -51,4 +52,6 @@ func main() {
 	fmt.Println(string(output))
 	util.PrintMemUsage()
 
+	server := api.NewServer()
+	server.Start()
 }
