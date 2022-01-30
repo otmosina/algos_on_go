@@ -48,20 +48,12 @@ func isAnagramm(word1, word2 string) bool {
 	hash := make(map[byte]int)
 	bytes1 := []byte(word1)
 	for _, b := range bytes1 {
-		if _, ok := hash[b]; ok {
-			hash[b]++
-		} else {
-			hash[b] = 1
-		}
+		hash[b]++
 	}
 
 	bytes2 := []byte(word2)
 	for _, b := range bytes2 {
-		if _, ok := hash[b]; ok {
-			hash[b]--
-		} else {
-			return false
-		}
+		hash[b]--
 	}
 
 	for _, v := range hash {
