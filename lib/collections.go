@@ -1,8 +1,10 @@
 package lib
 
 import (
-	"strings"
+	"fmt"
+	"sort"
 	"strconv"
+	"strings"
 )
 
 // # Реализуйте функцию `make_censored()`, которая заменяет каждое вхождение указанных слов в предложении на последовательность `$#%!` и возвращает полученную строку. Аргументы:
@@ -103,4 +105,54 @@ func CompareVersion(v1, v2 string) int8 {
 	} else {
 		return -1
 	}
+}
+
+// # frozen_string_literal: true
+
+// require_relative 'test_helper'
+// require_relative '../lib/build_query_string'
+
+// ### lib/build_query_string.rb
+
+// # Реализуйте функцию `build_query_string()`, которая принимает на вход список параметров и возвращает сформированный query string из этих параметров. Имена параметров в выходной строке должны располагаться в алфавитном порядке (то есть их нужно отсортировать).
+
+// # ```ruby
+// # puts build_query_string({ per: 10, page: 1 })
+// # # => 'page=1&per=10'
+
+// # puts build_query_string({ param: 'all', param1: true  })
+// # # => 'param=all&param1=true'
+// # ```
+
+// # rubocop:disable Style/For
+// # BEGIN
+
+// def build_query_string(parametrs)
+//   return '' if parametrs.empty?
+
+//   result = []
+//   sorted_params = parametrs.sort
+//   sorted_params.each do |el|
+//     key, value = el
+//     result << "#{key}=#{value}"
+//   end
+//   result.join('&')
+// end
+
+// # END
+// # rubocop:enable Style/For
+
+func BuildQueryString(params map[string]string) string {
+	var names []string
+	var strs []string
+
+	for k, _ := range params {
+		names = append(names, k)
+	}
+
+	sort.Strings(names)
+	for _, v := range names {
+		strs = append(strs, fmt.Sprintf("%s=%s", v, params[v]))
+	}
+	return strings.Join(strs, "&")
 }
