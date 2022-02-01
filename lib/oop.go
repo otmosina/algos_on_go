@@ -6,36 +6,29 @@ import (
 )
 
 type Url struct {
-	url    string
+	url    *url.URL
 	Params map[string]string
 }
 
-func NewUrl(url string) *Url {
-	return &Url{url: url, Params: make(map[string]string)}
+func NewUrl(u string) *Url {
+	urlObj, err := url.Parse(u)
+	if err != nil {
+		panic("Err when url parse")
+	}
+	return &Url{url: urlObj, Params: make(map[string]string)}
 }
 
 func (u *Url) Scheme() string {
-	urlObj, err := url.Parse(u.url)
-	if err != nil {
-		panic("Err when url parse")
-	}
-	return urlObj.Scheme
+	return u.url.Scheme
 }
 
 func (u *Url) Host() string {
-	urlObj, err := url.Parse(u.url)
-	if err != nil {
-		panic("Err when url parse")
-	}
-	return urlObj.Host
+	return u.url.Host
 }
 
 func (u *Url) QueryParams() map[string]string {
-	urlObj, err := url.Parse(u.url)
-	if err != nil {
-		panic("Err when url parse")
-	}
-	pairs := strings.Split(urlObj.RawQuery, "&")
+
+	pairs := strings.Split(u.url.RawQuery, "&")
 	for _, pair := range pairs {
 		pairArr := strings.Split(pair, "=")
 		u.Params[pairArr[0]] = pairArr[1]
