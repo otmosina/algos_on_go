@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -33,6 +34,13 @@ func TestQueryParam(t *testing.T) {
 	u := NewUrl(yaurl)
 
 	require.Equal(t, "value", u.QueryParam("key"))
+}
+
+func TestCompare(t *testing.T) {
+	u1 := NewUrl(yaurl)
+	u2 := NewUrl(yaurl)
+
+	require.True(t, reflect.DeepEqual(u1, u2))
 }
 
 // #END
