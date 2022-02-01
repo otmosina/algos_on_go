@@ -21,3 +21,10 @@ func (s *Stack) Push(element string) {
 func (s *Stack) ToArray() []string {
 	return s.storage
 }
+
+func (s *Stack) Empty() bool {
+	if len(s.storage) == 0 {
+		return true
+	}
+	return false
+}
