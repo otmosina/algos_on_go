@@ -25,7 +25,14 @@ func TestQueryString(t *testing.T) {
 	expectedParams := map[string]string{"a": "b", "c": "d", "lala": "value"}
 	u := NewUrl(googleUrl)
 
-	require.Equal(t, expectedParams, u.QueryString())
+	require.Equal(t, expectedParams, u.QueryParams())
+}
+
+func TestQueryParam(t *testing.T) {
+	// expectedParams := map[string]string{"a": "b", "c": "d", "lala": "value"}
+	u := NewUrl(yaurl)
+
+	require.Equal(t, "value", u.QueryParam("key"))
 }
 
 // #END
