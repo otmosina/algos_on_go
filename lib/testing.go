@@ -14,6 +14,10 @@ func (s *Stack) Pop() string {
 	return last
 }
 
+func (s *Stack) Push(element string) {
+	s.storage = append(s.storage, element)
+}
+
 func (s *Stack) ToArray() []string {
 	return s.storage
 }
