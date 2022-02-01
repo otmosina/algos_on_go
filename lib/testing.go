@@ -23,8 +23,9 @@ func (s *Stack) ToArray() []string {
 }
 
 func (s *Stack) Empty() bool {
-	if len(s.storage) == 0 {
-		return true
-	}
-	return false
+	return len(s.storage) == 0
+}
+
+func (s *Stack) Clear() {
+	s.storage = []string{}
 }

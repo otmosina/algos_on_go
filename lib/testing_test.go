@@ -33,8 +33,9 @@ func TestPush(t *testing.T) {
 }
 
 func TestEmpty(t *testing.T) {
-	_ = TestStack.Pop()
-	_ = TestStack.Pop()
+	// _ = TestStack.Pop()
+	// _ = TestStack.Pop()
+	TestStack.Clear()
 	// f := reflect.DeepEqual(TestStack.ToArray(), []string{"ruby", "go"})
 	require.True(t, TestStack.Empty())
 }
